@@ -1,2 +1,30 @@
-# Auto_Reply_Bot
-AI-powered auto-reply bot for Facebook real estate pages across all Egypt. Covers Messenger &amp; comments with a hybrid engine: your custom listings + free OpenRouter LLM (llama-3.1-8b). Self-learning knowledge base that auto-updates from messages, comments, posts &amp; manual inputs. Scalable for nationwide coverage.
+# Egypt Real Estate Bot - بوت رد تلقائي لكل مصر
+
+بوت ذكي للرد التلقائي على تعليقات ورسائل صفحات العقارات في جميع أنحاء مصر.
+
+### المميزات (Nationwide Edition):
+
+**1. يغطي مصر كلها:**
+القاهرة الجديدة، زايد، أكتوبر، العاصمة الإدارية، الإسكندرية، المنصورة، الدلتا، الصعيد، المدن الجديدة، سوهاج وكل المحافظات.
+
+**2. رد هجين (قاعدة + ذكاء):**
+- لو السؤال موجود في قاعدة البيانات اللي انت بتضيفها -> يرد منها مباشرة
+- لو مش موجود -> الذكاء الاصطناعي `llama-3.1-8b-instruct:free` المجاني يرد بخبرته العقارية في مصر
+
+**3. قاعدة بيانات ذاتية التعلم:**
+كل رسالة، كل تعليق، كل منشور جديد على الصفحة بيتسجل تلقائي في `knowledge_base.json`
+البوت كل مرة بيقرا آخر 20 معلومة + آخر أسئلة العملاء.
+
+**4. تقدر تضيف معلومات يدوياً:**
+POST /add-info  {"info": "شقة جديدة 150م في العاصمة الإدارية - 2 مليون - تقسيط"}
+
+**5. مجاني 100%:** يستخدم OpenRouter المجاني
+
+### التشغيل على Render:
+Build: pip install -r requirements.txt
+Start: gunicorn app:app
+ENV:
+- OPENROUTER_API_KEY
+- MODEL_NAME=meta-llama/llama-3.1-8b-instruct:free
+- FB_PAGE_ACCESS_TOKEN
+- FB_VERIFY_TOKEN=egypt_verify_123

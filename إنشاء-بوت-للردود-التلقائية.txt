@@ -1,0 +1,26 @@
+# Secrets - MUST NOT upload - Egypt Real Estate Bot
+.env
+.env.local
+
+# Bot Database - grows with customer messages (private for all Egypt)
+knowledge_base.json
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyc
+*.pyo
+venv/
+env/
+ENV/
+.venv
+*.egg-info/
+dist/
+build/
+
+# Render / OS
+.DS_Store
+.vscode/
+.idea/
