@@ -1,9 +1,11 @@
 import json
 import os
+import shutil
 from datetime import datetime
 import threading
 
-DB_FILE = "knowledge_base.json"
+DB_FILE = os.environ.get("KB_PATH", "/tmp/knowledge_base.json")
+FALLBACK_FILE = "knowledge_base.json"
 
 class KnowledgeBase:
     def __init__(self):
@@ -21,6 +23,12 @@ class KnowledgeBase:
             self._save()
 
     def _load(self):
+        # On Vercel, copy initial KB to /tmp if not exists
+        if not os.path.exists(DB_FILE) and os.path.exists(FALLBACK_FILE):
+            try:
+                shutil.copy(FALLBACK_FILE, DB_FILE)
+            except:
+                pass
         if os.path.exists(DB_FILE):
             try:
                 with open(DB_FILE, 'r', encoding='utf-8') as f:
